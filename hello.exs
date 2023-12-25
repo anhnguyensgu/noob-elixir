@@ -18,6 +18,17 @@ get_result = fn ->
   end
 end
 
-1..5
-|> Enum.map(&renamed_async_query.("query #{&1}"))
-|> Enum.map(fn _ -> get_result.() end)
+defmodule AsyncModuleTest do
+  def run do
+    1..5
+    |> Enum.map(&renamed_async_query.("query #{&1}"))
+    |> Enum.map(fn _ -> get_result.() end)
+  end
+end
+
+defmodule Solution do
+  @spec max_product(nums :: [integer]) :: integer
+  def max_product(nums) do
+    Enum.sort(nums, :desc) |> Enum.take(2) |> Enum.reduce(0, &(&2 * (&1 - 1)))
+  end
+end
